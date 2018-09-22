@@ -1,0 +1,171 @@
+---
+title: "Curso R"
+author: "Johnny Alvarez"
+date: "9/15/2018"
+output:
+  html_document: default
+  pdf_document: default
+  word_document: default
+---
+
+## Introduccion
+
+```{r, include=TRUE, echo=FALSE, out.width="30%"}
+htmltools::img(src = "Intro.png",
+               alt = 'logo',
+               style = 'position:center; top:0; right:1%; width=20px;height=15px')
+```
+
+*R = Lenguaje de programacion estadistica* <br/>
+*R Studio = compañía que diseño la IDE para el desarrollo e interpretación de R*
+
+
+### RStudio Desktop IDE:
+
+Es la aplicación que se puede correr en los diferentes sistemas operativos, por ejemplo Windows, Mac, Linux entre otros
+
+### RStudio Server Open Source: 
+
+Este servidor corresponde a un servidor virtual el cual puede ser instalado en ambientes de Lunix como Redhat, Fedora, Ubunto, etc. Permite al usuario tener la experiencia de hacer deploys dentro de un servidor, optimizar recursos y aprovechar mejor la memoria de la computadora.
+
+### RStudio Server Pro:
+
+Al igual que el servidor open source el Server Pro permite a los usuarios hacer deploy en un servidor virtual, sin emgargo esta es una versión de paga, con características mas avanzadas en términos de seguirdad, métricas de seguirdad, sesiones multiples, entre otros.
+
+### Links de descarga:
+
+Para descargar R: 
+<https://cran.r-project.org>
+Para descargar R-Studio: 
+<https://www.rstudio.com/products/rstudio/download/>
+
+
+## Consola:
+
+```{r, include=TRUE, echo=FALSE, out.width="30%"}
+htmltools::img(src = "Consola.png",
+               alt = 'logo',
+               style = 'position:center; top:0; right:1%; width=20px;height=15px')
+```
+
+***
+1. Paneles
+  + Consola = *Interprete de R donde se puede escribir el código directo*
+  + Texto = *En esta sección se puede escribir segmentos de código (Métodos), poner comentarios, etc*
+  + Ambiente = *En esta pestaña, el desarrollador es capaz de visualizar los elementos que se van generando en la aplicación, revisar el historial, conecciones y documentos compartidos en GIT*
+  + Archivos = *En la pestaña de archivos el desarrollador puede ver cuales archivos se encunetran dentro de la carpeta de la aplicación, visualizar los gráficos (Plots), ver los paquetes disponible para instalar así como los instaldados, acceso a la sección de ayuda, y por último visualización de gráficos*
+
+**Es importante tener en cuenta que los paneles son altamente manipulables o sea que los puede modificar a gusto del desarrollador**
+
+## Series
+
+### **Programming**
+
+* Writing code in RStudio
+* Debugging code in RStudio
+* Package writing in RStudio
+
+### **Managing Change**
+
+* Projects in RStudio
+* Github and RStudio
+* Packrat and RStudio
+ 
+## Writing code in RStudio
+
+Algunis ejemplos:
+
+```{r, echo = TRUE}
+paste("Hello", "Word")
+
+serie1 <- 1:10
+serie2 <- 11:20
+
+print(serie1)
+serie2
+```
+
+*En IDE:* <br/>
+View(iris)
+
+* Visualización
+* Función de filtrado
+
+Ejemplos de ploteo
+
+````{r, echo = TRUE}
+# Simple Plot
+plot(iris)
+
+# Histogram
+hist(iris$Sepal.Length)
+````
+
+Una vez que se genera el gráfico, el usuario tiene la capacidad de exportarlo como una imagen, un pdf o simplemente copiarlo en el clipboard
+
+<br/>
+
+## Ejemplos de instalación y uso de librerias
+
+````{r, echo = TRUE}
+# install.packages("dygraphs")
+library(dygraphs)
+dygraph(mdeaths)
+````
+
+### Ayuda:
+La sección de ayuda de R además de explicar un tema en específico, tiene varios elementos que pueden ser de mucha utilidad para el desarrollador o usuario de la IDE
+
+<br/>
+
+Para invocar la ayuda se usa el signo "?" seguido del metodo al que queremos hacer el llamado
+Ejemplo:
+
+*En IDE:* <br/>
+?dygraph
+
+Dentro del módulo de ayuda se puede dirigir hacia home page, donde encotrará mucha mas ayuda referente a R y a sus librerias y como utilizarlas.
+
+*Ejemplo de la funcion write:*
+*En IDE:* <br/>
+write.csv()
+
+Notese que dentro del parentesis al dar la opcion Ctrl + Space, R de inmediato le muestra los parametros incluidos dentro de la función.
+
+*Ejemplo de como abrir un archivo R*
+*En IDE:* <br/>
+En la barra de herramientas se encuentra el folder con la instrucción para abrir un archivo R.
+
+Como ejercicio:
+
+* Crear un script tipo R desde File -> New File
+* Crear un script tipo R desde shortcut
+* Abrir el script desde una ubicación específica
+* Abrir el script desde File -> Recent Files
+
+*Ejemplo de creación de gráfico en ggplot*
+
+````{r, echo = TRUE}
+library(ggplot2)
+ggplot(data = iris,aes(x = Species,y = Sepal.Length, fill = Species)) + 
+  geom_col()
+````
+
+*Ejemplo para escribir comentarios*
+````{r, echo = TRUE}
+# Existens dos formas de comentar y eliminar el comentario en un parrafo u oración
+# 1- Usando el signo "#" antes de la oracion individuamente
+# 2- Marcando el parrafo y usando el comando MAC = Command + Shift + C, PC = Control + Shift + C
+````
+
+## Entrando en el Código
+Cuando tenemos scripts con mucho código y necesitamos navegar entre las lines, archivos etc podemos usar los shortcuts abajo nombrados para localizar mas facilmente lo que buscamos:
+
+1- Ir a una linea específica: <br/>
+  * MAC = Commadn + Shift + Option + G <br/>
+  * PC = Shift + Alt + G
+  
+2- Encontrar y reemplazar: <br/>
+  Mac = Command + F <br/>
+  PC = Control + F
+  

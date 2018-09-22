@@ -1,0 +1,215 @@
+---
+title: "Entrando en Código"
+author: "Jonny Alvarez"
+date: "9/20/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introducción al lenguaje R
+
+### Funciones Apply:
+La familia de funciones apply son de gran utilidad cuando trabajamos con matrices de gran tamaño, estas funciones nos facilitan reescribir mucho codigo y son faciles de usar:
+
+La familia apply consiste en apply, lapply, sapply, mapply, la cual vamos a estar estudiando en este documento:
+
+### *Apply*
+
++ Mas usualmete usado en filas y columnas de una matriz
++ Puede ser usado en arrays, por ejemplo para obtener el promedio de una array de una matriz
++ No es tan rápido como escribir un loop pero funciona en una linea (código)
+
+````{r, echo = TRUE}
+str(apply)
+# x = array
+# MARGIN = vector de números enteros
+# ... Otros argumentos pasados por función
+````
+
+*Ejemplo:*
+````{r, echo = TRUE}
+set.seed(123) # Se planta una semilla 123
+x <- matrix(rnorm(200), 20, 10)
+x
+apply(x, 1, sum)
+apply(x, 2, mean)
+# 1 - Filas
+# 2 - Columnas
+````
+
+*Acceso rápido a funciones sum y mean:*
+
++ rowSums = apply(x, 1, sum)
++ rowMeans = apply(x, 1, mean)
++ colSums = apply(x, 2, sum)
++ colMeans = apply(x, 2, mean)
+
+````{r, echo = TRUE}
+set.seed(123) # Se planta una semilla 123
+x <- matrix(rnorm(200), 20, 10)
+x
+rowSums(x)
+colSums(x)
+rowMeans(x)
+colMeans(x)
+````
+
+*Funciones adicionales para el uso de Apply*
+Apply se puede utilizar cuando entramos en la parte estadística por ejemplo para obtener los quartiles de las filas de una matrix:
+
+````{r, echo = TRUE}
+set.seed(123)
+x <- matrix(rnorm(200), 20, 10)
+apply(x, 1, quantile, probs = c(0.25, 0.75))
+
+
+# Ejmeplo, Promedio de una matriz en un array
+set.seed(123)
+str(array)
+a <- array(rnorm(2 * 2 * 10), c(2, 2, 10))
+a
+apply(a, c(1, 2), mean)
+````
+
+
+Al trabajar con loops o while es sumamento util trabajar con la familia apply para facilitar mas el proceso y desarrollo de analisis:
+
+### *lapply*
+
++ Trabaja sobre listas
++ Hace un recorrido sobre la lista, y evalua la funcion en cada elemento
+
+````{r, echo = TRUE}
+set.seed(123)
+x <- list(a = 1:5, b = rnorm(10))
+x
+lapply(x, mean)
+
+x1 <- list(a = 1:4, b = rnorm(10), c = rnorm(20, 1), d = rnorm(100, 5)) 
+x1
+lapply(x1, mean)
+````
+
+
+
+````{r, echo = TRUE}
+x <-  c(1:4, "eje")
+x
+xlist <- list(1:4, "eje", mtcars)
+xlist
+str(x)
+str(xlist)
+lapply(x, max)
+lapply(xlist, max)
+
+lapply(xlist, function(ej) ej[1])
+
+````
+
+
+### *sapply*
+
++ Funciona igual que el lapply, pero simplifica el resultado
+````{r, echo = TRUE}
+set.seed(123)
+x <- list(a = 1:5, b = rnorm(10))
+x
+sapply(x, mean)
+
+x1 <- list(a = 1:4, b = rnorm(10), c = rnorm(20, 1), d = rnorm(100, 5)) 
+x1
+sapply(x1, mean)
+````
+
+
+
+````{r, echo = TRUE}
+x <-  c(1:4, "eje")
+x
+xlist <- list(1:4, "eje", mtcars)
+xlist
+str(x)
+str(xlist)
+sapply(x, max)
+sapply(xlist, max)
+
+sapply(xlist, function(ej) ej[1])
+
+````
+
+
+
+
++ tapply: Apply a function over subsets of a vector
++ mapply: Multivariate version of lapply
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Debugging:
+Cuando se esta trabajando en proyectos grandes, o tenemos la necesidad de revisar líneas de código una por una, la mejor opción hacer un debug, para ello, podemos utilizar estos comandos:
+
+* debug()
+* undebug()
+* debugonce()
+* browser()
+* traceback()
+* options(error = browser), options(error = NULL)
+
+*En Este Link podrás encotrar más información de el procedimiento de debugging* <https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio>
+
+
+*En IDE*
+<br>
+````{r, echo = TRUE}
+# La función de abajo se va a utilizar con el fin de aplicar el debug, de momento lo que hace es determinar si un numero es par o impar por medio del residuo del comando %%:
+
+test <- function(x){
+  for(i in 1:x){
+    if(i %% 2 == TRUE){
+      par = "Par"
+    } else{
+      par = "Impar"
+    }
+    print(par)
+  }
+}
+
+test(20)
+````
